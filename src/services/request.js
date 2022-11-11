@@ -3,12 +3,12 @@ var isRun = true;
 // 定义拦截器，在请求出发前或出发后做一些额外操作
 const interceptor = function(chain) {
     //  请求参数
-    const reParms = chain.requsetParams
-    const {methods,data,url} = reParms
+    const requestParams = chain.requestParams
+    const {method,data,url} = requestParams
     const token = getStorageSync("token");
     if (token) {
         // 为请求头添加token
-        reParms.header["Authorization"] = token;
+        requestParams.header["Authorization"] = token;
         requestParams.header["Source"] = 2;
     }
     // 必须调用 chain.proceed(requestParams) 以调用下一个拦截器或发起请求。
@@ -52,9 +52,42 @@ const interceptor = function(chain) {
 
 Taro.addInterceptor(interceptor);
 
-let request 
-// request[method] = async (url,_params,isJson = true) => {
-//     try {
-//         const response = await Taro.re
-//     }
-// }
+export const GET = async (url, _params, isJson = true) => {
+  try {
+    const response = await Taro.request({
+      method: 'GET',
+      url,
+      data: {
+        ..._params,
+      },
+      header: {
+        "content-type": isJson
+          ? "application/json"
+          : "application/x-www-form-urlencoded"
+      },
+    });
+    return response;
+  } catch (err) {
+    return Promise.reject(err);
+  }
+}
+
+export const POST = async (url, _params, isJson = true) => {
+  try {
+    const response = await Taro.request({
+      method: 'POST',
+      url,
+      data: {
+        ..._params,
+      },
+      header: {
+        "content-type": isJson
+          ? "application/json"
+          : "application/x-www-form-urlencoded"
+      },
+    });
+    return response;
+  } catch (err) {
+    return Promise.reject(err);
+  }
+}
