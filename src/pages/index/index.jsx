@@ -1,30 +1,43 @@
-import { Component } from 'react'
-import { View, Text } from '@tarojs/components'
+import React,{useEffect,useState} from 'react'
 
-import {
-  getAppCommentList
-} from '../../services/index';
+import {getQuestiontype} from '../../services/index'
 
-export default class Index extends Component {
+import {styled} from 'linaria/react'
+import { View,ScrollView } from '@tarojs/components'
 
-  componentWillMount () { }
-
-  async componentDidMount () {
-    let list = await getAppCommentList({appid: 145,page: 1,pagesize: 20})
-    console.log('测试接口数据',list)
+const PageWrapper = styled(({className}) => {
+  let [queList,setQuelist] = useState([])
+  const questiontype = async () => {
+    let {data: res} = await getQuestiontype()
+    if (res.code == 0 && res.data) {
+      setQuelist(res.data)
+    }
   }
+  useEffect(() => {
+    questiontype()
+    console.log(queList)
+  },[])
+  return (
+    <ScrollView
+    className={className}
+    scrollX>
+      {
+        queList && queList.length > 0 ?
+        queList.map(item => {
+          return (
+            <View key={item.id}>{item.name}</View>
+          )
+        }) : ''
+      }
+    </ScrollView>
+  )
+})``
 
-  componentWillUnmount () { }
-
-  componentDidShow () { }
-
-  componentDidHide () { }
-
-  render () {
-    return (
-      <View className='index'>
-        <Text>Hello world!</Text>
-      </View>
-    )
-  }
+function Index() {
+  return (
+    <PageWrapper></PageWrapper>
+  )
 }
+export default Index
+
+

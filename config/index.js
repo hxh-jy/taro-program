@@ -40,6 +40,16 @@ const config = {
           generateScopedName: '[name]__[local]___[hash:base64:5]'
         }
       }
+    },
+    webpackChain(chain, webpack) {
+      // linaria/loader 选项详见 https://github.com/callstack/linaria/blob/master/docs/BUNDLERS_INTEGRATION.md#webpack
+      chain.module
+        .rule("script")
+        .use("linariaLoader")
+        .loader("linaria/loader")
+        .options({
+          sourceMap: process.env.NODE_ENV !== "production",
+        });
     }
   },
   h5: {
@@ -58,6 +68,15 @@ const config = {
           generateScopedName: '[name]__[local]___[hash:base64:5]'
         }
       }
+    },
+    webpackChain(chain, webpack) {
+      chain.module
+        .rule("script")
+        .use("linariaLoader")
+        .loader("linaria/loader")
+        .options({
+          sourceMap: process.env.NODE_ENV !== "production",
+        });
     }
   }
 }

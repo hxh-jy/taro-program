@@ -1,6 +1,6 @@
 import {GET,POST} from "./request"
-const prefix3 = "https://api.ourplay.net/opseoapi"
-
+const api = 'https://data.ourplay.net'
+// https://data.ourplay.net/smallprogram/questiontype
 // 游戏评论列表接口
-export const getAppCommentList = (data) =>
-  GET(`${prefix3}/app/commentlist`, data, false);
+export const getQuestiontype = (data) =>
+  POST(`${api}/smallprogram/questiontype`, data, true);

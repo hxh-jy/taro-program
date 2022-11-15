@@ -5,6 +5,7 @@ module.exports = {
     ['taro', {
       framework: 'react',
       ts: true
-    }]
+    }],
+    "linaria/babel", // 添加到 babel-preset
   ]
 }
