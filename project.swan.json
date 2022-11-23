@@ -1,0 +1,21 @@
+{
+    "host": "baiduboxapp",
+    "setting": {
+        "urlCheck": true
+    },
+    "swan": {
+        "baiduboxapp": {
+            "swanJsVersion": "3.570.8",
+            "extensionJsVersion": "1.21.2"
+        }
+    },
+    "compilation-args": {
+        "common": {
+            "quickPreview": true
+        },
+        "forceChanged": {
+            "quickPreview": true
+        }
+    },
+    "projectname": "baidu-ourplay"
+}
