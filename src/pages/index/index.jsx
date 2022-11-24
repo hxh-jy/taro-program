@@ -4,6 +4,8 @@ import {styled} from 'linaria/react'
 
 import {getQuestiontype} from '../../services/index'
 
+import { getCurrentInstance } from "@tarojs/taro";
+
 let TabNav = styled(ScrollView)`
   position: fixed;
   left: 0;
@@ -39,8 +41,10 @@ let TabNavItem = styled(View)`
 `
 export default function index() {
   let data = ['数据1','数据2','数据3','数据4','数据5','数据5','数据6','数据7','数据8','数据9']
+  let path = getCurrentInstance().router.path.split('/')[2]
   let [queList,setQuelist] = useState([])
   let [current,setCurrent] = useState(0)
+  let [viewId,setViewId] = useState(0)
   const questiontype = async () => {
     let {data: res} = await getQuestiontype()
     if (res.code == 0 && res.data) {
@@ -51,24 +55,30 @@ export default function index() {
     questiontype()
     console.log('测试quelist',queList)
   },[])
-  let changeNav = (index) => {
+  let changeNav = (item,index) => {
     setCurrent(index)
+    setViewId(path + current)
     console.log('测试获取导航栏下标',index)
   }
   let handleSwiperchange = (e) => {
     setCurrent(e.target.current)
+    setViewId(path + current)
     console.log('轮播图改变了',e.target.current)
   }
   return (
     <>
-      <TabNav scrollX>
+      <TabNav 
+      scrollIntoView={viewId}
+      scrollWithAnimation 
+      scrollX>
         {
           queList.map((item,index) => {
             return(
               <TabNavItem  
+              id={path + index}
               index={index}
               current={current}
-              onClick={() => changeNav(index)} 
+              onClick={() => changeNav(item,index)} 
               key={item.id}>{item.name}</TabNavItem>
             )
           })

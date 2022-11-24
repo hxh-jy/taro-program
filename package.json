@@ -2,6 +2,7 @@
   "name": "baidu-ourplay",
   "version": "1.0.0",
   "private": true,
+  "lintOnSave":false,
   "description": "this is the first taro project",
   "templateInfo": {
     "name": "default",

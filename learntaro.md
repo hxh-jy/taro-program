@@ -68,3 +68,9 @@ if (moreApp) {
 }
 ```
 
+
+
+Taro项目开发过程中遇到的问题
+    scroll-view+swiper的组合使用
+    scroll-view中scrollIntoView属性的具体使用应该清楚
+    import { getCurrentInstance } from "@tarojs/taro";  getCurrentInstance.router用于访问当前组件/页面路由的详情。

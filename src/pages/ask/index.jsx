@@ -1,9 +1,8 @@
-import React,{useEffect,useState} from 'react'
-
-import {getQuestiontype} from '../../services/index'
+import React, {useEffect,useState} from 'react'
 
 import {styled} from 'linaria/react'
 import { View,ScrollView } from '@tarojs/components'
+import {getQuestiontype} from '../../services/index'
 
 let TabNavScroll = styled(ScrollView)`
   position: fixed;
@@ -57,6 +56,7 @@ const PageWrapper = styled(({className}) => {
   return (
     <TabNavScroll
     className={className}
+    scroll-with-animation
     scrollX>
       {
         queList && queList.length > 0 ?
