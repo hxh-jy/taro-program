@@ -7,6 +7,6 @@ const ourApi = 'https://api.ourplay.net/opseoapi/'
 export const getQuestiontype = (data) =>
   POST(`${api}/smallprogram/questiontype`, data, true);
 
-// 游戏问答内容列表接口
+// 游戏问答内容列表接口 参数有cid，page,pagesize
 export const getGptypeqalist = (data) =>
   GET(`${ourApi}minipgqa/gptypeqalist`, data, false);
