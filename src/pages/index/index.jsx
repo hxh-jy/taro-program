@@ -2,7 +2,9 @@ import {useEffect,useState} from 'react'
 import { Swiper, SwiperItem,View,ScrollView,Text,Image } from '@tarojs/components'
 import {styled} from 'linaria/react'
 
-import { getCurrentInstance } from "@tarojs/taro";
+import { getCurrentInstance,useReachBottom } from "@tarojs/taro";
+
+import { AtActivityIndicator } from 'taro-ui'
 
 import {getQuestiontype,getGptypeqalist} from '../../services/index'
 
@@ -111,28 +113,32 @@ let Content = styled(({info,className}) => {
     }
   }
 `
-export default function index() {
-  let data = ['数据1','数据2','数据3','数据4','数据5','数据5','数据6','数据7','数据8','数据9']
+let index = styled(({className}) => {
   let path = getCurrentInstance().router.path.split('/')[2]
   let [queList,setQuelist] = useState([])
   let [typeQalist,setTypeqalist] = useState([])
   let [current,setCurrent] = useState(0)
   let [viewId,setViewId] = useState(0)
+  let [loading,setLoading] = useState(false)
+  let [page,setPage] = useState(0)
   const questiontype = async () => {
     let {data: res} = await getQuestiontype()
     if (res.code == 0 && res.data) {
       setQuelist(res.data)
     }
   }
-  const gptypeqalist = async () => {
+  const gptypeqalist = async (page = 1,cid = 0) => {
     let params = {
-      cid: 0,
-      page: 1,
+      cid,
+      page,
       pagesize: 15
     }
     let {data: res} = await getGptypeqalist(params)
     if (res.code == 1) {
-      setTypeqalist(res.data.list)
+      setTypeqalist([...queList,...res.data.list])
+      if (res.data.list && res.data.list.length < 15) {
+        setLoading (false)
+      }
     }
   }
   useEffect(() => {
@@ -144,9 +150,22 @@ export default function index() {
     setViewId(path + current)
   }
   let handleSwiperchange = (e) => {
+    let cid = queList[e.target.current].id
     setCurrent(e.target.current)
     setViewId(path + current)
+    gptypeqalist(cid)
   }
+  useReachBottom(() => {
+    // 是否显示加载更多按钮
+    setLoading(true)
+    let cid = queList[current].id
+    setTimeout(() => {
+      gptypeqalist(cid,page + 1)
+      setLoading(false)
+      setPage(page + 1)
+    },1000)
+    console.log('监听上拉触底，taro的hooks',current)
+  }) 
   return (
     <>
       <TabNav 
@@ -166,29 +185,37 @@ export default function index() {
           })
         }
       </TabNav>
-    <Swiper
-    current={current}
-    style="marginTop: 50px;height: 95vh"
-    onChange={handleSwiperchange}
-    circular>
+      <Swiper
+      current={current}
+      style="marginTop: 50px;height: 95vh"
+      onChange={handleSwiperchange}
+      circular>
+        {
+          queList.map(item => {
+            return (
+              <SwiperItem key={item.id}>
+                <ScrollView style="height: 100%" scrollY>
+                  {
+                    typeQalist.map(qa => {
+                      return (
+                        <Content key={qa.id} info={qa}></Content>
+                      )
+                    })
+                  }
+                </ScrollView>
+              </SwiperItem>
+            )
+          })
+        }
+      </Swiper>
       {
-        queList.map(item => {
-          return (
-            <SwiperItem key={item.id}>
-              <ScrollView style="height: 100%" scrollY>
-                {
-                  typeQalist.map(qa => {
-                    return (
-                      <Content key={qa.id} info={qa}></Content>
-                    )
-                  })
-                }
-              </ScrollView>
-            </SwiperItem>
-          )
-        })
+        loading ? <AtActivityIndicator 
+                  mode="center"
+                  color="#10b8a1"
+                  size={20}
+                  content='加载中...'></AtActivityIndicator> : ''
       }
-    </Swiper>
     </>
   )
-}
+})``
+export default index

@@ -1283,7 +1283,7 @@
     "@babel/runtime" "^7.11.2"
     "@tarojs/runtime" "3.3.14"
 
-"@tarojs/components@3.3.14":
+"@tarojs/components@>=3", "@tarojs/components@3.3.14":
   "integrity" "sha512-rJiLMSdLaF1oND0TH++CmsIE51mux+WRsT3kc8qN/Kn3f2NAd9H/g5gecb6CWeBHvj8qb21otdnjLgoTGtwKtA=="
   "resolved" "https://registry.npmjs.org/@tarojs/components/-/components-3.3.14.tgz"
   "version" "3.3.14"
@@ -1436,7 +1436,7 @@
     "@tarojs/service" "3.3.14"
     "@tarojs/shared" "3.3.14"
 
-"@tarojs/react@3.3.14":
+"@tarojs/react@>=3", "@tarojs/react@3.3.14":
   "integrity" "sha512-wgG4EZAUPji4JHHpiXVC9edinVmimtL99eDDVKt54qTBjJPvr4rvuYF0eRcrMjiy9uniwG1G0fzRyYzX/MSsNQ=="
   "resolved" "https://registry.npmjs.org/@tarojs/react/-/react-3.3.14.tgz"
   "version" "3.3.14"
@@ -3180,7 +3180,7 @@
     "isobject" "^3.0.0"
     "static-extend" "^0.1.1"
 
-"classnames@^2.2.5":
+"classnames@^2.2.5", "classnames@^2.2.6":
   "integrity" "sha512-CSbhY4cFEJRe6/GQzIk5qXZ4Jeg5pcsP7b5peFSDpffpe1cqjASH/n9UTjBwOp6XpMSTwQ8Za2K5V02ueA7Tmw=="
   "resolved" "https://registry.npmjs.org/classnames/-/classnames-2.3.2.tgz"
   "version" "2.3.2"
@@ -3799,6 +3799,11 @@
     "abab" "^2.0.0"
     "whatwg-mimetype" "^2.2.0"
     "whatwg-url" "^7.0.0"
+
+"dayjs@^1.7.7":
+  "integrity" "sha512-zZbY5giJAinCG+7AGaw0wIhNZ6J8AhWuSXKvuc1KAyMiRsvGQWqh4L+MomvhdAYjN+lqvVCMq1I41e3YHvXkyQ=="
+  "resolved" "https://registry.npmjs.org/dayjs/-/dayjs-1.11.6.tgz"
+  "version" "1.11.6"
 
 "debug@^2.2.0", "debug@^2.3.3", "debug@^2.6.0", "debug@^2.6.9", "debug@2.6.9":
   "integrity" "sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA=="
@@ -6710,7 +6715,7 @@
   "resolved" "https://registry.npmjs.org/lodash.sortby/-/lodash.sortby-4.7.0.tgz"
   "version" "4.7.0"
 
-"lodash@^4.17.11", "lodash@^4.17.14", "lodash@^4.17.19", "lodash@^4.17.20", "lodash@^4.17.21", "lodash@^4.17.3", "lodash@^4.17.4", "lodash@4.17.21":
+"lodash@^4.17.10", "lodash@^4.17.11", "lodash@^4.17.14", "lodash@^4.17.19", "lodash@^4.17.20", "lodash@^4.17.21", "lodash@^4.17.3", "lodash@^4.17.4", "lodash@4.17.21":
   "integrity" "sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg=="
   "resolved" "https://registry.npmjs.org/lodash/-/lodash-4.17.21.tgz"
   "version" "4.17.21"
@@ -8389,7 +8394,7 @@
   "resolved" "https://registry.npmjs.org/promise-inflight/-/promise-inflight-1.0.1.tgz"
   "version" "1.0.1"
 
-"prop-types@^15.8.1":
+"prop-types@^15.7.2", "prop-types@^15.8.1":
   "integrity" "sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg=="
   "resolved" "https://registry.npmjs.org/prop-types/-/prop-types-15.8.1.tgz"
   "version" "15.8.1"
@@ -8574,7 +8579,7 @@
     "iconv-lite" "0.4.24"
     "unpipe" "1.0.0"
 
-"react-dom@^16.8 || ^17.0 || ^18.0", "react-dom@^17.0.0":
+"react-dom@^16.8 || ^17.0 || ^18.0", "react-dom@^17.0.0", "react-dom@>=16.13.0":
   "integrity" "sha512-s4h96KtLDUQlsENhMn1ar8t2bEa+q/YAtj8pPPdIjPDGBDIVNsrD9aXNWqspUe6AzKCIG0C1HZZLqLV7qpOBGA=="
   "resolved" "https://registry.npmjs.org/react-dom/-/react-dom-17.0.2.tgz"
   "version" "17.0.2"
@@ -8624,7 +8629,7 @@
   "resolved" "https://registry.npmjs.org/react-refresh/-/react-refresh-0.9.0.tgz"
   "version" "0.9.0"
 
-"react@^16.8 || ^17.0 || ^18.0", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^17.0.0", "react@^17.0.1", "react@17.0.2":
+"react@^16.8 || ^17.0 || ^18.0", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^17.0.0", "react@^17.0.1", "react@>=16.13.0", "react@17.0.2":
   "integrity" "sha512-gnhPt75i/dq/z3/6q/0asP78D0u592D5L1pd7M8P+dck6Fu/jJeL6iVVK23fptSUZj8Vjf++7wXA8UNclGQcbA=="
   "resolved" "https://registry.npmjs.org/react/-/react-17.0.2.tgz"
   "version" "17.0.2"
@@ -10228,6 +10233,16 @@
     "css-color-keywords" "^1.0.0"
     "css-mediaquery" "^0.1.2"
     "postcss-value-parser" "^3.3.0"
+
+"taro-ui@^3.0.0-alpha.10":
+  "integrity" "sha512-sNgMFKv1WrcUvxVrIP5CwzfSAdx5nCGJhb5+4atzK+nJneuX9lKO4hZhlJ4FchrlF68QjM5s5Rb47VAuXVbKsA=="
+  "resolved" "https://registry.npmjs.org/taro-ui/-/taro-ui-3.0.0-alpha.10.tgz"
+  "version" "3.0.0-alpha.10"
+  dependencies:
+    "classnames" "^2.2.6"
+    "dayjs" "^1.7.7"
+    "lodash" "^4.17.10"
+    "prop-types" "^15.7.2"
 
 "terser-webpack-plugin@^1.4.3":
   "integrity" "sha512-04Rfe496lN8EYruwi6oPQkG0vo8C+HT49X687FZnpPF0qMAIHONI6HEXYPKDOE8e5HjXTyKfqRd/agHtH0kOtw=="
