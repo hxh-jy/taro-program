@@ -3,9 +3,7 @@ import { Swiper, SwiperItem,View,ScrollView,Text,Image } from '@tarojs/component
 import {styled} from 'linaria/react'
 
 import { getCurrentInstance,useReachBottom } from "@tarojs/taro";
-
 import { AtActivityIndicator } from 'taro-ui'
-
 import {getQuestiontype,getGptypeqalist} from '../../services/index'
 
 let TabNav = styled(ScrollView)`
@@ -113,33 +111,35 @@ let Content = styled(({info,className}) => {
     }
   }
 `
-let index = styled(({className}) => {
+export default function index() {
   let path = getCurrentInstance().router.path.split('/')[2]
   let [queList,setQuelist] = useState([])
   let [typeQalist,setTypeqalist] = useState([])
   let [current,setCurrent] = useState(0)
   let [viewId,setViewId] = useState(0)
   let [loading,setLoading] = useState(false)
-  let [page,setPage] = useState(0)
+  let [currentPage,setCurrentpage] = useState(1)
+  let [content,setContent] = useState('加载中...')
   const questiontype = async () => {
     let {data: res} = await getQuestiontype()
     if (res.code == 0 && res.data) {
       setQuelist(res.data)
     }
   }
-  const gptypeqalist = async (page = 1,cid = 0) => {
+  const gptypeqalist = async (page=1,cid=0) => {
     let params = {
       cid,
       page,
       pagesize: 15
     }
     let {data: res} = await getGptypeqalist(params)
-    if (res.code == 1) {
-      setTypeqalist([...queList,...res.data.list])
-      if (res.data.list && res.data.list.length < 15) {
-        setLoading (false)
+    if (res.code == 1 && res.data.list && res.data.list.length > 0) {
+      if (page != 1) {
+        setTypeqalist([...typeQalist,...res.data.list])
+      } else {
+        setTypeqalist(res.data.list)
       }
-    }
+    } 
   }
   useEffect(() => {
     questiontype()
@@ -153,19 +153,20 @@ let index = styled(({className}) => {
     let cid = queList[e.target.current].id
     setCurrent(e.target.current)
     setViewId(path + current)
-    gptypeqalist(cid)
+    gptypeqalist(1,cid)
+    console.log('轮播图改变了',e)
   }
   useReachBottom(() => {
-    // 是否显示加载更多按钮
+    console.log('监听上拉触底事件***',current,currentPage)
     setLoading(true)
     let cid = queList[current].id
+    setCurrentpage(currentPage + 1)
+    let page = currentPage + 1 
     setTimeout(() => {
-      gptypeqalist(cid,page + 1)
+      gptypeqalist(page,cid)
       setLoading(false)
-      setPage(page + 1)
-    },1000)
-    console.log('监听上拉触底，taro的hooks',current)
-  }) 
+    },3000)
+  })
   return (
     <>
       <TabNav 
@@ -209,13 +210,14 @@ let index = styled(({className}) => {
         }
       </Swiper>
       {
-        loading ? <AtActivityIndicator 
-                  mode="center"
-                  color="#10b8a1"
-                  size={20}
-                  content='加载中...'></AtActivityIndicator> : ''
+        loading ? 
+        <AtActivityIndicator
+        mode="center"
+        color="#10b8a1"
+        content={content}
+        size="32"
+        ></AtActivityIndicator> : ''
       }
     </>
   )
-})``
-export default index
+}

@@ -3802,7 +3802,11 @@
 
 "dayjs@^1.7.7":
   "integrity" "sha512-zZbY5giJAinCG+7AGaw0wIhNZ6J8AhWuSXKvuc1KAyMiRsvGQWqh4L+MomvhdAYjN+lqvVCMq1I41e3YHvXkyQ=="
+<<<<<<< HEAD
   "resolved" "https://registry.npmjs.org/dayjs/-/dayjs-1.11.6.tgz"
+=======
+  "resolved" "https://registry.npmmirror.com/dayjs/-/dayjs-1.11.6.tgz"
+>>>>>>> d23a28ee97ecc82a03596712d67dcbccb3ac7bf1
   "version" "1.11.6"
 
 "debug@^2.2.0", "debug@^2.3.3", "debug@^2.6.0", "debug@^2.6.9", "debug@2.6.9":
@@ -10236,7 +10240,11 @@
 
 "taro-ui@^3.0.0-alpha.10":
   "integrity" "sha512-sNgMFKv1WrcUvxVrIP5CwzfSAdx5nCGJhb5+4atzK+nJneuX9lKO4hZhlJ4FchrlF68QjM5s5Rb47VAuXVbKsA=="
+<<<<<<< HEAD
   "resolved" "https://registry.npmjs.org/taro-ui/-/taro-ui-3.0.0-alpha.10.tgz"
+=======
+  "resolved" "https://registry.npmmirror.com/taro-ui/-/taro-ui-3.0.0-alpha.10.tgz"
+>>>>>>> d23a28ee97ecc82a03596712d67dcbccb3ac7bf1
   "version" "3.0.0-alpha.10"
   dependencies:
     "classnames" "^2.2.6"
